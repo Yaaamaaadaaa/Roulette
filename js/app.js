@@ -1,4 +1,9 @@
 $(function(){
+    // モーダル表示の制御
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    });
+
     // 追加ボタンクリックでユーザーを追加
     $('.add').click(function(){
         var add = '<tr class="item"><td><div class="color-indicator" style="background-color:#000000;"></div></td><td><input type="text" class="name" value="項目"></td><td><input type="number" class="ratio" value="1"></td><td class="probability"></td><td><button type="button" onclick="rmItem(this)">削除</button></td></tr>';
