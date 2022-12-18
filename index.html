@@ -3,22 +3,45 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <title>p5.js</title>
+    <title>WEBルーレット</title>
+    <link rel="stylesheet" href="./css/app.css">
 </head>
 <body>
-    <script src="./p5.min.js"></script>
-    <script src="./app.js"></script>
+    <h1>WEBルーレット</h1>
+
+    <div style="display:flex;">
+        <div>
+            <div id="canvas"></div>
+            <button type="button" id="reset" onclick="reset()">リセット</button>
+            <button type="button" id="start" onclick="start()">スタート！</button>
+            <button type="button" id="stop" onclick="stop()" style="display:none;">ストップ！</button>
+
+            <h2>結果</h2>
+            <p id="result">????</p>
+        </div>
+
+        <div style="margin-left:50px;">
+            <h2>ルーレット設定</h2>
+            <div>
+                <table id="table">
+                    <tr><th>色</th><th>名前</th><th>司会者の回数</th><th>確率</th><th>削除</th></tr>
+                    <tr class="item"><td><div class="color-indicator" style="background-color:#000000;"></div></td><td><input type="text" class="name" value="項目A"></td><td><input type="number" class="ratio" value="1"></td><td class="probability"></td><td><button type="button" onclick="rmItem(this)">削除</button></td></tr>
+                    <tr class="item"><td><div class="color-indicator" style="background-color:#000000;"></div></td><td><input type="text" class="name" value="項目B"></td><td><input type="number" class="ratio" value="1"></td><td class="probability"></td><td><button type="button" onclick="rmItem(this)">削除</button></td></tr>
+                    <tr class="item"><td><div class="color-indicator" style="background-color:#000000;"></div></td><td><input type="text" class="name" value="項目C"></td><td><input type="number" class="ratio" value="1"></td><td class="probability"></td><td><button type="button" onclick="rmItem(this)">削除</button></td></tr>
+                    <tr class="item"><td><div class="color-indicator" style="background-color:#000000;"></div></td><td><input type="text" class="name" value="項目D"></td><td><input type="number" class="ratio" value="1"></td><td class="probability"></td><td><button type="button" onclick="rmItem(this)">削除</button></td></tr>
+                    <tr class="item"><td><div class="color-indicator" style="background-color:#000000;"></div></td><td><input type="text" class="name" value="項目E"></td><td><input type="number" class="ratio" value="1"></td><td class="probability"></td><td><button type="button" onclick="rmItem(this)">削除</button></td></tr>
+                    <tr class="item"><td><div class="color-indicator" style="background-color:#000000;"></div></td><td><input type="text" class="name" value="項目F"></td><td><input type="number" class="ratio" value="1"></td><td class="probability"></td><td><button type="button" onclick="rmItem(this)">削除</button></td></tr>
+                </table>
+                <button type="button" class="add">追加</button>
+            </div>
+        </div>
+    </div>
+    
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
-    <style>
-    .p5Canvas{
-        max-width: 600px;
-        width: 100% !important;
-        height: auto !important;
-    }
-    </style>
-    <div id="canvas"></div>
+    <script src="./js/p5.min.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 </html>
