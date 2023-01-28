@@ -11,3 +11,14 @@
     font-size: 40px;
     font-weight: bold;
 }
+.image-in-modal{
+    width: 1000px;
+    height: 500px;
+}
+#result-in-modal{
+    position: absolute;
+    margin-left:345px;
+    margin-top:380px;
+    font-size: 50px;
+    font-weight: bold;
+}
