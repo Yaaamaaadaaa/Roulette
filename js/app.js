@@ -165,7 +165,9 @@ function start(){
         if(validation()==1){
             return;
         }
-        $('#stop').css('display', 'inline-block');
+        setTimeout(function(){
+            $('#stop').click();
+        }, 3000);
         $('#start').css('display', 'none');
         dataFetch();
         mode = Mode.acceleration;
@@ -173,17 +175,15 @@ function start(){
 }
 
 function stop(){
-    if(//mode==Mode.acceleration || //加速中でもストップボタンを効かせるにはコメントアウト
+    if(
        mode==Mode.constant){
         $('#start').css('display', 'none');
-        $('#stop').css('display', 'none');
         mode = Mode.deceleration;
     }
 }
 
 function reset(){
     $('#start').css('display', 'inline-block');
-    $('#stop').css('display', 'none');
     theta = 0.0;
     speed = 0.0;
     mode = Mode.waiting;
@@ -263,6 +263,8 @@ function draw(){
                 beforeAngleSum = angleSum;
             }
             $('#result').html(nameList[result]);
+            $('#result-in-modal').html(nameList[result]);
+            $('#show-result').click();
         }
         break;
     }
@@ -272,10 +274,10 @@ function draw(){
 function recalculate(){
     var ratioSumJs = 0;
     $('.ratio').each(function(){
-        ratioSumJs += $(this).val()-0;
+        ratioSumJs += 3 - $(this).val();
     });
     $(".item").each(function(){
-        var probability = ($(this).find(".ratio").first().val()-0) / ratioSumJs;
+        var probability = (3 - $(this).find(".ratio").first().val()) / ratioSumJs;
         probability*=100;
         probability = probability.toFixed(3);
         $(this).children(".probability").first().html(probability+"%");
