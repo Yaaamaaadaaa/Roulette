@@ -104,15 +104,32 @@ function cssColorSet(){
 //input to array
 function dataFetch(){
     ratioSum = 0.0;
-    $('.item').each(function(){
-        var ratio = $(this).find('.ratio').val()-0;
-        ratioSum += ratio;
+    let rate_array = [];
+    $('.ratio').each(function(){
+        let num = Number($(this).val());
+        if(num < 0) num = 0;
+        rate_array.push(num);
     });
+
+    while(!rate_array.includes(0)) {
+        rate_array.forEach(function(value, index) {
+            rate_array[index] = value - 1;
+        });
+    }
+    
+    rate_array.forEach(function(value) {        
+        add_value = 3 - value;
+        if(add_value < 0) add_value = 0;
+        ratioSum += add_value;
+    });
+
+    
     nameList = [];
     probabilityList = [];
-    $('.item').each(function(){
+    $('.item').each(function(index){
         var name = $(this).find('.name').val();
-        var ratio = $(this).find('.ratio').val()-0;
+        var ratio = 3 - rate_array[index];
+        if(ratio < 0) ratio = 0;
         nameList.push(name);
         probabilityList.push(ratio/ratioSum);
     });
@@ -149,7 +166,7 @@ function validation(){
         }
     });
     $('.ratio').each(function(){
-        if(!($(this).val()>0)){
+        if(!($(this).val() >= 0)){
             badflag = true;
         }
     });
@@ -199,6 +216,7 @@ function drawRoulette(){
     push();
     colorMode(HSL, 255);
     for(var i=0;i<len;i++){
+        if(probabilityList[i]== 0) continue;
         fill(colorList[i],255-COLOR_ADJ*colorList[i],128);
         arc(0,0,RADIUS*2,RADIUS*2,angleSum,angleSum+2*PI*probabilityList[i]);
         angleSum += probabilityList[i]*2*PI;
@@ -273,11 +291,28 @@ function draw(){
 
 function recalculate(){
     var ratioSumJs = 0;
+    let rate_array = [];
     $('.ratio').each(function(){
-        ratioSumJs += 3 - $(this).val();
+        let num = Number($(this).val());
+        if(num < 0) num = 0;
+        rate_array.push(num);
     });
-    $(".item").each(function(){
-        var probability = (3 - $(this).find(".ratio").first().val()) / ratioSumJs;
+
+    while(!rate_array.includes(0)) {
+        rate_array.forEach(function(value, index) {
+            rate_array[index] = value - 1;
+        });
+    }
+    
+    rate_array.forEach(function(value) {        
+        add_value = 3 - value;
+        if(add_value < 0) add_value = 0;
+        ratioSumJs += add_value;
+    });
+
+    $(".item").each(function(index){
+        var probability = (3 - rate_array[index]) / ratioSumJs;
+        if(probability < 0) probability = 0;
         probability*=100;
         probability = probability.toFixed(3);
         $(this).children(".probability").first().html(probability+"%");
